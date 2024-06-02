@@ -257,20 +257,20 @@ bool TrainerInterface::IsValidSentencePiece(
       // in which case whitespace only pieces can occur.
       if (!trainer_spec_.allow_whitespace_only_pieces() ||
           !all_whitespace_piece) {
-        if (trainer_spec_.treat_whitespace_as_suffix()) {
-          if ((trainer_spec_.split_by_whitespace() &&
-               pos < sentencepiece.size() - 1) ||
-              (!trainer_spec_.split_by_whitespace() &&
-               pos < sentencepiece.size() - 1 && pos == 0)) {
-            return false;
-          }
-        } else {
-          if ((trainer_spec_.split_by_whitespace() && pos > 0) ||
-              (!trainer_spec_.split_by_whitespace() && pos > 0 &&
-               pos == sentencepiece.size() - 1)) {
-            return false;
-          }
-        }
+        // if (trainer_spec_.treat_whitespace_as_suffix()) {
+        //   if ((trainer_spec_.split_by_whitespace() &&
+        //        pos < sentencepiece.size() - 1) ||
+        //       (!trainer_spec_.split_by_whitespace() &&
+        //        pos < sentencepiece.size() - 1 && pos == 0)) {
+        //     return false;
+        //   }
+        // } else {
+        //   if ((trainer_spec_.split_by_whitespace() && pos > 0) ||
+        //       (!trainer_spec_.split_by_whitespace() && pos > 0 &&
+        //        pos == sentencepiece.size() - 1)) {
+        //     return false;
+        //   }
+        // }
       }
     } else {
       auto s = unicode_script::GetScript(c);
