@@ -187,52 +187,52 @@ std::vector<absl::string_view> SplitIntoWords(absl::string_view text,
     // }
 
 
-    // WS-ONLY
-    if (begin < end) result.emplace_back(begin, 0);
-    while (begin < end) {
-      const int mblen =
-          std::min<int>(string_util::OneCharLen(begin), end - begin);
-      const bool is_ws = absl::string_view(begin, mblen) == kSpaceSymbol;
-
-      if (is_ws) {
-        // Skips whitespace
-        begin += mblen;
-        result.emplace_back(begin, 0);
-        continue;
-      }
-      
-      result.back() =
-          absl::string_view(result.back().data(), result.back().size() + mblen);
-      begin += mblen;
-
-    }
-
-    // BOTH
-    // ATTENTION: First word of sentence is no prefixed. Must find a way to insert ws at start.
-    // if (begin < end) {
-    //   result.emplace_back(begin, 0);
-    // }
+    // // WS-ONLY
+    // if (begin < end) result.emplace_back(begin, 0);
     // while (begin < end) {
     //   const int mblen =
     //       std::min<int>(string_util::OneCharLen(begin), end - begin);
     //   const bool is_ws = absl::string_view(begin, mblen) == kSpaceSymbol;
 
     //   if (is_ws) {
-    //     result.back() =
-    //       absl::string_view(result.back().data(), result.back().size() + mblen);
+    //     // Skips whitespace
+    //     begin += mblen;
     //     result.emplace_back(begin, 0);
+    //     continue;
     //   }
       
-    //   // only duplicate whitespace if not at end of sentence.
-    //   if (begin + mblen < end) {
-    //     result.back() =
+    //   result.back() =
     //       absl::string_view(result.back().data(), result.back().size() + mblen);
-    //   }
     //   begin += mblen;
+
     // }
 
-    // //LOGGING
-    // LOG(INFO) << result;
+    // BOTH
+    // ATTENTION: First word of sentence is no prefixed. Must find a way to insert ws at start.
+    if (begin < end) {
+      result.emplace_back(begin, 0);
+    }
+    while (begin < end) {
+      const int mblen =
+          std::min<int>(string_util::OneCharLen(begin), end - begin);
+      const bool is_ws = absl::string_view(begin, mblen) == kSpaceSymbol;
+
+      if (is_ws) {
+        result.back() =
+          absl::string_view(result.back().data(), result.back().size() + mblen);
+        result.emplace_back(begin, 0);
+      }
+      
+      // only duplicate whitespace if not at end of sentence.
+      if (begin + mblen < end) {
+        result.back() =
+          absl::string_view(result.back().data(), result.back().size() + mblen);
+      }
+      begin += mblen;
+    }
+
+    //LOGGING
+    LOG(INFO) << result;
 
   } else { 
     
