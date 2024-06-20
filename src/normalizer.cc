@@ -126,6 +126,8 @@ util::Status Normalizer::Normalize(absl::string_view input,
   // "_world" and "_hello_world", which help the trainer to extract
   // "_world" as one symbol.
   if (!treat_whitespace_as_suffix_ && spec_->add_dummy_prefix()) add_ws();
+  // Add space symbol no questions asked
+  add_ws();
 
   bool is_prev_space = spec_->remove_extra_whitespaces();
   while (!input.empty()) {
@@ -143,7 +145,11 @@ util::Status Normalizer::Normalize(absl::string_view input,
         if (spec_->escape_whitespaces() && data[n] == ' ') {
           // replace ' ' with kSpaceSymbol.
           normalized->append(kSpaceSymbol.data(), kSpaceSymbol.size());
+          // DOUBLE kSpaceSymbol
+          normalized->append(kSpaceSymbol.data(), kSpaceSymbol.size());
           for (size_t m = 0; m < kSpaceSymbol.size(); ++m) {
+            norm_to_orig->push_back(consumed);
+            // DOUBLE
             norm_to_orig->push_back(consumed);
           }
         } else {
