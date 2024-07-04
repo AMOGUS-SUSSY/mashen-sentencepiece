@@ -6,7 +6,7 @@ from tqdm import tqdm
 
 # Run from mashen-data
 IN = "big_data"
-NPY = "npy"
+NPY = "filenames"
 NEW_DOC_TOKEN = b"<D>"
 TMP_FILENAME = "concat.txt"
 
