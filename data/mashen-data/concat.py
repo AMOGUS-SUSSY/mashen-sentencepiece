@@ -73,7 +73,7 @@ def main(is_books3):
             for file in files:
                 print(os.path.join(root, file))
                 load_in = np.load(os.path.join(root, file))
-                names = [fn[0] for fn in load_in]
+                names = [os.path.splitext(os.path.basename(fn))[0] for fn in load_in[:,0]]
                 contents += get_contents(get_books3_file_paths(IN, names))
         
     else:
