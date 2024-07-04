@@ -5,7 +5,7 @@ import argparse
 from tqdm import tqdm
 
 # Run from mashen-data
-IN = "big_data/books3"
+IN = "big_data"
 NPY = "filenames"
 NEW_DOC_TOKEN = b"<D>"
 TMP_FILENAME = "concat.txt"
