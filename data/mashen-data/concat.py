@@ -88,7 +88,9 @@ def main(is_books3):
 if __name__ == "__main__":
     # Use argparse to get command line arguments
     parser = argparse.ArgumentParser()
-    parser.add_argument("--is_books3", action=argparse.BooleanOptionalAction, help="Is input-data books3")
+    parser.add_argument("--books3", action='store_true')
+    parser.add_argument("--no_books3", dest="books3", action='store_false')
+    parser.set_defaults(books3=True)
     args = parser.parse_args()
 
-main(args.is_books3)
+main(args.books3)
