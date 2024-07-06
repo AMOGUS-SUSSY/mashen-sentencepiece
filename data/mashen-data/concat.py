@@ -13,7 +13,8 @@ TMP_FILENAME = "concat.txt"
 # Save paths into a list and returns said list
 def get_contents(file_absolute_paths):   
     contents = []
-    for filename in file_absolute_paths:
+    print("Loading contents:")
+    for filename in tqdm(file_absolute_paths):
         with open(filename, "rb") as f:
             content = f.read()
         # replace all the \r\n with \n 
