@@ -79,11 +79,12 @@ def main(is_books3):
     else:
         contents = get_contents(get_data_from_dir(IN))
         
-    print("Creating concat_file:")
-    concat_contents = NEW_DOC_TOKEN + tqdm(NEW_DOC_TOKEN.join(contents))
+    print("Creating concat_file...")
+    concat_contents = NEW_DOC_TOKEN + NEW_DOC_TOKEN.join(contents)
     if os.path.exists(TMP_FILENAME):
         os.remove(TMP_FILENAME)
     with open(TMP_FILENAME, 'wb') as f:
+        print("Writing to file")
         f.write(concat_contents)
 
 if __name__ == "__main__":
