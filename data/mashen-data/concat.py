@@ -71,7 +71,7 @@ def main(is_books3):
     if (is_books3):
         for root, dirs, files in os.walk(NPY):
             for file in files:
-                print(os.path.join(root, file))
+                print("Loading from " + os.path.join(root, file))
                 load_in = np.load(os.path.join(root, file))
                 names = [os.path.splitext(os.path.basename(fn))[0] for fn in load_in[:,0]]
                 contents += get_contents(get_books3_file_paths(IN, names))
@@ -79,7 +79,8 @@ def main(is_books3):
     else:
         contents = get_contents(get_data_from_dir(IN))
         
-    concat_contents = NEW_DOC_TOKEN + NEW_DOC_TOKEN.join(contents)
+    print("Creating concat_file:")
+    concat_contents = NEW_DOC_TOKEN + tqdm(NEW_DOC_TOKEN.join(contents))
     if os.path.exists(TMP_FILENAME):
         os.remove(TMP_FILENAME)
     with open(TMP_FILENAME, 'wb') as f:
