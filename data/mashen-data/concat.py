@@ -69,6 +69,10 @@ def main(is_books3):
 
     contents = []
 
+    if os.path.exists(TMP_FILENAME):
+        print("Old file removed")
+        os.remove(TMP_FILENAME)
+
     if (is_books3):
         for root, dirs, files in os.walk(NPY):
             for file in files:
@@ -76,17 +80,17 @@ def main(is_books3):
                 load_in = np.load(os.path.join(root, file))
                 names = [os.path.splitext(os.path.basename(fn))[0] for fn in load_in[:,0]]
                 contents += get_contents(get_books3_file_paths(IN, names))
+
+            print("Writing to file:")
+            for text in tqdm(contents):
+                with open(TMP_FILENAME, 'ab') as f:
+                    f.write(NEW_DOC_TOKEN + text)
+            contents = []
+
         
     else:
         contents = get_contents(get_data_from_dir(IN))
-        
-    print("Creating concat_file...")
-    concat_contents = NEW_DOC_TOKEN + NEW_DOC_TOKEN.join(contents)
-    if os.path.exists(TMP_FILENAME):
-        os.remove(TMP_FILENAME)
-    with open(TMP_FILENAME, 'wb') as f:
-        print("Writing to file")
-        f.write(concat_contents)
+        print("NOT IMPLEMENTED FULLY YET!")
 
 if __name__ == "__main__":
     # Use argparse to get command line arguments
