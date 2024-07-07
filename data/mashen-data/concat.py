@@ -81,11 +81,11 @@ def main(is_books3):
                 names = [os.path.splitext(os.path.basename(fn))[0] for fn in load_in[:,0]]
                 contents += get_contents(get_books3_file_paths(IN, names))
 
-            print("Writing to file:")
-            for text in tqdm(contents):
-                with open(TMP_FILENAME, 'ab') as f:
-                    f.write(NEW_DOC_TOKEN + text)
-            contents = []
+                print("Writing to file:")
+                for text in tqdm(contents):
+                    with open(TMP_FILENAME, 'ab') as f:
+                        f.write(NEW_DOC_TOKEN + text)
+                contents = []
 
         
     else:
