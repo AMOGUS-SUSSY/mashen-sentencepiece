@@ -145,12 +145,15 @@ util::Status Normalizer::Normalize(absl::string_view input,
         if (spec_->escape_whitespaces() && data[n] == ' ') {
           // replace ' ' with kSpaceSymbol.
           normalized->append(kSpaceSymbol.data(), kSpaceSymbol.size());
-          // DOUBLE kSpaceSymbol
-          normalized->append(kSpaceSymbol.data(), kSpaceSymbol.size());
+
+          // // DOUBLE kSpaceSymbol
+          // normalized->append(kSpaceSymbol.data(), kSpaceSymbol.size());
+
           for (size_t m = 0; m < kSpaceSymbol.size(); ++m) {
             norm_to_orig->push_back(consumed);
-            // DOUBLE
-            norm_to_orig->push_back(consumed);
+
+            // // DOUBLE
+            // norm_to_orig->push_back(consumed);
           }
         } else {
           *normalized += data[n];
