@@ -188,25 +188,25 @@ std::vector<absl::string_view> SplitIntoWords(absl::string_view text,
     // }
 
 
-    // WS-ONLY
-    if (begin < end) result.emplace_back(begin, 0);
-    while (begin < end) {
-      const int mblen =
-          std::min<int>(string_util::OneCharLen(begin), end - begin);
-      const bool is_ws = absl::string_view(begin, mblen) == kSpaceSymbol;
+    // // WS-ONLY
+    // if (begin < end) result.emplace_back(begin, 0);
+    // while (begin < end) {
+    //   const int mblen =
+    //       std::min<int>(string_util::OneCharLen(begin), end - begin);
+    //   const bool is_ws = absl::string_view(begin, mblen) == kSpaceSymbol;
 
-      if (is_ws) {
-        // Skips whitespace
-        begin += mblen;
-        result.emplace_back(begin, 0);
-        continue;
-      }
+    //   if (is_ws) {
+    //     // Skips whitespace
+    //     begin += mblen;
+    //     result.emplace_back(begin, 0);
+    //     continue;
+    //   }
       
-      result.back() =
-          absl::string_view(result.back().data(), result.back().size() + mblen);
-      begin += mblen;
+    //   result.back() =
+    //       absl::string_view(result.back().data(), result.back().size() + mblen);
+    //   begin += mblen;
 
-    }
+    // }
 
     // // BOTH
     // // ATTENTION: First word of sentence is no prefixed. Must find a way to insert ws at start.
@@ -249,31 +249,31 @@ std::vector<absl::string_view> SplitIntoWords(absl::string_view text,
     //   begin += mblen;
     // }
 
-    // // BOTH
-    // // Run with remove_extra_whitespace for now
-    // if (begin < end) {
-    //   result.emplace_back(begin, 0);
-    // }
-    // while (begin < end) {
-    //   const int mblen = 
-    //     std::min<int>(string_util::OneCharLen(begin), end - begin);
-    //   const bool is_ws = absl::string_view(begin, mblen) == kSpaceSymbol;
+    // BOTH
+    // Run with remove_extra_whitespace for now
+    if (begin < end) {
+      result.emplace_back(begin, 0);
+    }
+    while (begin < end) {
+      const int mblen = 
+        std::min<int>(string_util::OneCharLen(begin), end - begin);
+      const bool is_ws = absl::string_view(begin, mblen) == kSpaceSymbol;
       
 
-    //   if (is_ws && in_ws_sequence) {
-    //     result.emplace_back(begin,0);
-    //   } else if (is_ws) {
-    //     in_ws_sequence = true;
-    //   } else {
-    //     in_ws_sequence = false;
-    //   }
+      if (is_ws && in_ws_sequence) {
+        result.emplace_back(begin,0);
+      } else if (is_ws) {
+        in_ws_sequence = true;
+      } else {
+        in_ws_sequence = false;
+      }
 
-    //   result.back() =
-    //     absl::string_view(result.back().data(), result.back().size() + mblen);
+      result.back() =
+        absl::string_view(result.back().data(), result.back().size() + mblen);
 
-    //   begin += mblen;
+      begin += mblen;
 
-    // }
+    }
 
     // //LOGGING
     // LOG(INFO) << result;
