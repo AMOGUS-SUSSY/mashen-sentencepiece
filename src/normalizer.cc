@@ -126,8 +126,9 @@ util::Status Normalizer::Normalize(absl::string_view input,
   // "_world" and "_hello_world", which help the trainer to extract
   // "_world" as one symbol.
   if (!treat_whitespace_as_suffix_ && spec_->add_dummy_prefix()) add_ws();
-  // Add space symbol no questions asked
-  add_ws();
+
+  // // Add prefix space symbol no questions asked
+  // add_ws();
 
   bool is_prev_space = spec_->remove_extra_whitespaces();
   while (!input.empty()) {
