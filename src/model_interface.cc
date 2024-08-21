@@ -208,47 +208,6 @@ std::vector<absl::string_view> SplitIntoWords(absl::string_view text,
 
     // }
 
-    // // BOTH
-    // // ATTENTION: First word of sentence is no prefixed. Must find a way to insert ws at start.
-    // char temp[200];
-    // memcpy(temp, absl::StrCat(kSpaceSymbol,begin).data(), 199);
-    // if (begin < end) {
-    //   result.emplace_back(begin, 0);
-    // }
-    // while (begin < end) {
-    //   const int mblen = 
-    //     std::min<int>(string_util::OneCharLen(begin), end - begin);
-    //   const bool is_ws = absl::string_view(begin, mblen) == kSpaceSymbol;
-      
-
-    //   // insert suffixed whitespace
-    //   if (is_ws) {
-
-    //     result.back() =
-    //       absl::string_view(result.back().data(), result.back().size() + mblen);
-    //     result.emplace_back(begin, 0);
-
-    //   }
-      
-    //   // insert duplicated prefixed whitespace
-    //   // only duplicate whitespace if not at end of sentence.
-    //   if (begin + mblen < end) {
-
-    //     if (begin == text.data()) {
-
-    //       result.emplace_back(temp);
-    //       result.back() =
-    //         absl::string_view(result.back().data(), kSpaceSymbol.length() + mblen);
-
-    //     } else {
-    //       result.back() =
-    //         absl::string_view(result.back().data(), result.back().size() + mblen);
-    //     }
-        
-    //   }
-    //   begin += mblen;
-    // }
-
     // BOTH
     // Run with remove_extra_whitespace for now
     if (begin < end) {
