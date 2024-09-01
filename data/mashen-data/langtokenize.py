@@ -3,11 +3,10 @@ import numpy as np
 import argparse
 import sentencepiece as spm
 
-def tokenize_file(args):
+def tokenize_file(file, model, out):
     """
     Tokenizes a given file using a SentencePiece model and saves the output as a numpy array.
     """
-    file, model, out = args
         
     data = np.asarray(model.EncodeAsIds(file), dtype=get_dtype(model.GetPieceSize()))
     np.save(out, data)
@@ -36,4 +35,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
 def main(file, model, out) :
-    tokenize_file(file, model, out)
+    sp = spm.SentencePieceProcessor()
+    sp.Load(model)
+    tokenize_file(file, sp, out)
+
+main(args.filename, args.model, args.out)
