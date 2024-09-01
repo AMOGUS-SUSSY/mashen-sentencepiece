@@ -7,8 +7,11 @@ def tokenize_file(file, model, out):
     """
     Tokenizes a given file using a SentencePiece model and saves the output as a numpy array.
     """
+
+    with open(file, 'r') as f:
+        text = f.read()
         
-    data = np.asarray(model.EncodeAsIds(file), dtype=get_dtype(model.GetPieceSize()))
+    data = np.asarray(model.EncodeAsIds(text), dtype=get_dtype(model.GetPieceSize()))
     np.save(out, data)
 
 def get_dtype(vocab_size):
