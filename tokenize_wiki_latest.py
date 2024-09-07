@@ -109,9 +109,8 @@ def process_sentences(sentences, spacy_tokenizer):
 
 def process_article(article, spacy_sentencizer, spacy_tokenizer):
     article = json.loads(article)
-    sentences = get_sentences(article, spacy_sentencizer)
-    parsed = process_sentences(sentences, spacy_tokenizer)
-    return parsed
+    paragraphs = get_paragraphs(article)
+    return paragraphs
 
 
 def write_txt(fname, data):
