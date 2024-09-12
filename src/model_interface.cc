@@ -188,51 +188,51 @@ std::vector<absl::string_view> SplitIntoWords(absl::string_view text,
     // }
 
 
-    // WS-ONLY
-    if (begin < end) result.emplace_back(begin, 0);
-    while (begin < end) {
-      const int mblen =
-          std::min<int>(string_util::OneCharLen(begin), end - begin);
-      const bool is_ws = absl::string_view(begin, mblen) == kSpaceSymbol;
-
-      if (is_ws) {
-        // Skips whitespace
-        begin += mblen;
-        result.emplace_back(begin, 0);
-        continue;
-      }
-      
-      result.back() =
-          absl::string_view(result.back().data(), result.back().size() + mblen);
-      begin += mblen;
-
-    }
-
-    // // BOTH
-    // // Run with remove_extra_whitespace for now
-    // if (begin < end) {
-    //   result.emplace_back(begin, 0);
-    // }
+    // // WS-ONLY
+    // if (begin < end) result.emplace_back(begin, 0);
     // while (begin < end) {
-    //   const int mblen = 
-    //     std::min<int>(string_util::OneCharLen(begin), end - begin);
+    //   const int mblen =
+    //       std::min<int>(string_util::OneCharLen(begin), end - begin);
     //   const bool is_ws = absl::string_view(begin, mblen) == kSpaceSymbol;
-      
 
-    //   if (is_ws && in_ws_sequence) {
-    //     result.emplace_back(begin,0);
-    //   } else if (is_ws) {
-    //     in_ws_sequence = true;
-    //   } else {
-    //     in_ws_sequence = false;
+    //   if (is_ws) {
+    //     // Skips whitespace
+    //     begin += mblen;
+    //     result.emplace_back(begin, 0);
+    //     continue;
     //   }
-
+      
     //   result.back() =
-    //     absl::string_view(result.back().data(), result.back().size() + mblen);
-
+    //       absl::string_view(result.back().data(), result.back().size() + mblen);
     //   begin += mblen;
 
     // }
+
+    // BOTH
+    // Run with remove_extra_whitespace for now
+    if (begin < end) {
+      result.emplace_back(begin, 0);
+    }
+    while (begin < end) {
+      const int mblen = 
+        std::min<int>(string_util::OneCharLen(begin), end - begin);
+      const bool is_ws = absl::string_view(begin, mblen) == kSpaceSymbol;
+      
+
+      if (is_ws && in_ws_sequence) {
+        result.emplace_back(begin,0);
+      } else if (is_ws) {
+        in_ws_sequence = true;
+      } else {
+        in_ws_sequence = false;
+      }
+
+      result.back() =
+        absl::string_view(result.back().data(), result.back().size() + mblen);
+
+      begin += mblen;
+
+    }
 
     // //LOGGING
     // LOG(INFO) << result;
