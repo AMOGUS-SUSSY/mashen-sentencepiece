@@ -13,8 +13,8 @@ elif [ -f ../src/CMakeLists.txt ]; then
   SRC_DIR=..  
 else
   # Try taged version. Othewise, use head.
-  git clone https://github.com/google/sentencepiece.git -b v"${VERSION}" --depth 1 || \
-  git clone https://github.com/google/sentencepiece.git --depth 1
+  git clone https://github.com/AMOGUS-SUSSY/mashen-sentencepiece.git -b v"${VERSION}" --depth 1 || \
+  git clone https://github.com/AMOGUS-SUSSY/mashen-sentencepiece.git --depth 1
   SRC_DIR=./sentencepiece
 fi
 
