@@ -188,7 +188,7 @@ setup(
     long_description_content_type='text/markdown',
     version=__version__,
     package_dir={'': 'src'},
-    url='https://github.com/google/sentencepiece',
+    url='https://github.com/AMOGUS-SUSSY/mashen-sentencepiece',
     license='Apache',
     platforms='Unix',
     py_modules=[
