@@ -347,7 +347,7 @@ inline void InitNumThreads(const std::vector<T> &ins, int *num_threads) {
 %ignore sentencepiece::SentencePieceProcessor::DecodePiecesAsImmutableProto;
 %ignore sentencepiece::SentencePieceProcessor::DecodeIdsAsImmutableProto;
 
-
+%ignore sentencepiece::SentencePieceProcessor::Normalize;
 %ignore sentencepiece::SentencePieceProcessor::NormalizeWithOffsets;
 
 %ignore sentencepiece::SentencePieceProcessor::model_proto;
